@@ -1,7 +1,7 @@
 Test Data Bundles for Apex
 ----
 
-Test Data Bundles makes generating data easy for Apex unit tests.  Simply request the number of rows per table you need and you'll get back everything you need.  Custom metadata specify the object dependencies.  All dependencies will be created but you'll only get back what you ask for.  
+Test Data Bundles makes generating data easy for Apex unit tests.  In my opinion this is a process that slows down unit test writing and was therefore ripe for automation.  Simply request the number of rows per table you need and you'll get back everything you need.  Dependencies and lookups will be taken care of for you along with randomized data in all the fields you need.  While all dependant records will be created you'll only get back what you ask for.
 
 **Example:**
 ```sh
@@ -14,7 +14,7 @@ Map<Schema.SObjectType, List<SObject>> testOpportunity = TDB_MyBundles.getBundle
 );
 ```
 
-That call will return a map containing 1 opportunity and 3 opportunity products.  In the background an account, 3 products, and 3 pricebook entries will also be created.  If you specify those objects in the call they will be returned to you.
+That call will return a map containing 1 opportunity and 3 opportunity products.  In the background an account, 3 products, and 3 pricebook entries will also be created.  If you specify those objects in the call they will be returned to you.  With that data, run your business logic and asserts.  Easy!
 
 Feel free to create sugar methods for commonly-used bundles.
 
@@ -34,7 +34,7 @@ You will need to do a few things to customize this tool for your org.  For each 
  - Fix dependent picklists.  The current logic is buggy and therefore not included.
  - Create multiple profiles of data (for instance a brand new opportunity which may require certain data and a closed opportunity which may require much more data.)
  - Change constantValues maps to use describe field references instead of strings
- - Object_Dependencies and Other_Lookupsshould be derived from object describe
+ - Object_Dependencies and Other_Lookups should be derived from object describe
  - Consider moving constantValues maps to the database
  - Add hints for random values such as date = today/past/future or more specific ranges for numbers
  - Find ways to handle systemic validations such as only one contact can be primary.  What about custom validations?
