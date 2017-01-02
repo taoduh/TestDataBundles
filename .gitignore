@@ -1,0 +1,6 @@
+Test Data Bundles.sublime-project
+build.properties
+build.xml
+unpackaged/
+retrieveUnpackaged/
+config/
